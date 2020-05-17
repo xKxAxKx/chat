@@ -26,20 +26,9 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
   t.templ.Execute(w, nil)
 }
 
-
 func main() {
-  http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-    w.Write([]byte(`
-      <html>
-        <head>
-          <title>チャット</title>
-        </head>
-        <body>
-          チャットしましょう！
-        </body>
-      </html>
-      `))
-  })
+  // ルートパスの定義
+  http.Handle("/", &templateHandler{filename: "chat.html"})
 
   // WEBサーバーを開始
   if err := http.ListenAndServe(":8080", nil); err != nil {
