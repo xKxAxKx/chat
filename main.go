@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
 	"path/filepath"
@@ -23,10 +24,13 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			template.Must(template.ParseFiles(filepath.Join("templates",
 				t.filename)))
 	})
-	t.templ.Execute(w, nil)
+	t.templ.Execute(w, r)
 }
 
 func main() {
+	var addr = flag.String("addr", ":8080", "アプリケーションのアドレス")
+	flag.Parse() // フラグを解釈する
+
 	r := newRoom()
 
 	http.Handle("/", &templateHandler{filename: "chat.html"})
@@ -36,6 +40,7 @@ func main() {
 	go r.run()
 
 	// WEBサーバーを開始
+	log.Println("Webサーバーを開始します。ポート:", *addr)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal("ListenAndServe:", err)
 	}
