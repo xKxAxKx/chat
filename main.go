@@ -27,8 +27,13 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	// ルートパスの定義
+	r := newRoom()
+
 	http.Handle("/", &templateHandler{filename: "chat.html"})
+	http.Handle("/room", r)
+
+	// チャットルームを開始する
+	go r.run()
 
 	// WEBサーバーを開始
 	if err := http.ListenAndServe(":8080", nil); err != nil {
