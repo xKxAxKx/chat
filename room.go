@@ -41,7 +41,7 @@ func (r *room) run() {
 			delete(r.clients, client)
 			close(client.send)
 		case msg := <-r.forward:
-			// 全てのクライアントにメッセージを転送
+			// すべてのクライアントにメッセージを転送
 			for client := range r.clients {
 				select {
 				case client.send <- msg:
