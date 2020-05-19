@@ -1,9 +1,9 @@
 package trace
 
 import (
-  "testing"
+	"testing"
 )
 
 func TestNew(t *testing.T) {
-  t.Error("まだテストを作成していません")
+	t.Error("まだテストを作成していません")
 }
