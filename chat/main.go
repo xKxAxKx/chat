@@ -4,9 +4,12 @@ import (
 	"flag"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"sync"
 	"text/template"
+
+	"github.com/xKxAxKx/chat/trace"
 )
 
 // templは1つのテンプレートを表す
@@ -32,6 +35,7 @@ func main() {
 	flag.Parse() // フラグを解釈する
 
 	r := newRoom()
+	r.tracer = trace.New(os.Stdout)
 
 	http.Handle("/", &templateHandler{filename: "chat.html"})
 	http.Handle("/room", r)
