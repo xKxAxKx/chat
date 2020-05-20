@@ -47,6 +47,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatalln("認証プロバイダーの取得に失敗しました:", provider, "-", err)
 		}
+
 		loginUrl, err := provider.GetBeginAuthURL(nil, nil)
 		if err != nil {
 			log.Fatalln("GetBeginAuthURLの呼び出し中にエラーが発生しました:", provider, "-", err)
