@@ -9,6 +9,8 @@ import (
 	"sync"
 	"text/template"
 
+	"github.com/stretchr/gomniauth"
+	"github.com/stretchr/gomniauth/providers/google"
 	"github.com/xKxAxKx/chat/trace"
 )
 
@@ -34,11 +36,22 @@ func main() {
 	var addr = flag.String("addr", ":8080", "アプリケーションのアドレス")
 	flag.Parse() // フラグを解釈する
 
+	// Gomniauthのセットアップ
+	gomniauth.SetSecurityKey(SecurityKey)
+	gomniauth.WithProviders(
+		google.New(
+			GoogleClientId,
+			GoogleClientSecret,
+			GoogleRedirectUrls,
+		),
+	)
+
 	r := newRoom()
 	r.tracer = trace.New(os.Stdout)
 
 	http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
 	http.Handle("/login", &templateHandler{filename: "login.html"})
+	http.HandleFunc("/auth/", loginHandler)
 	http.Handle("/room", r)
 
 	// チャットルームを開始する
