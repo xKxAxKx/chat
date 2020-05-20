@@ -11,8 +11,8 @@ import (
 
 	"github.com/stretchr/gomniauth"
 	"github.com/stretchr/gomniauth/providers/google"
-	"github.com/xKxAxKx/chat/trace"
 	"github.com/stretchr/objx"
+	"github.com/xKxAxKx/chat/trace"
 )
 
 // templは1つのテンプレートを表す
@@ -31,7 +31,7 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				t.filename)))
 	})
 
-	data := map[string]interface{} {
+	data := map[string]interface{}{
 		"Host": r.Host,
 	}
 	if authCookie, err := r.Cookie("auth"); err == nil {
