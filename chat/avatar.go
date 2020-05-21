@@ -16,7 +16,7 @@ type Avatar interface {
 	   問題が発生した場合にはエラーを返す
 	   特に、URLを取得できなかった場合にはErrNoAvatarURLを返す
 	*/
-	GetAvatarURL(c *client) (string, error)
+	GetAvatarURL(ChatUser) (string, error)
 }
 
 type AuthAvatar struct{}
