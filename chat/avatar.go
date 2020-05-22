@@ -6,10 +6,10 @@ import (
 	"path/filepath"
 )
 
-// ErrNoAvatarはAvatarインスタンスがアバターのURLを返すことができない場合に発生するエラー
+// ErrNoAvatarURL ...AvatarインスタンスがアバターのURLを返すことができない場合に発生するエラー
 var ErrNoAvatarURL = errors.New("chat: アバターのURLを取得できません。")
 
-// Avatarはユーザーのプロフィール画像を表す型です。
+// Avatar ...ユーザーのプロフィール画像を表す型です。
 type Avatar interface {
 	/*
 	   指定されたクライアントのアバターのURLを返す
