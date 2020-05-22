@@ -15,6 +15,8 @@ import (
 	"github.com/xKxAxKx/chat/trace"
 )
 
+var avatars Avatar = UseFileSystemAvatar
+
 // templは1つのテンプレートを表す
 type templateHandler struct {
 	once     sync.Once
