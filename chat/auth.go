@@ -14,7 +14,7 @@ import (
 import gomniauthcommon "github.com/stretchr/gomniauth/common"
 
 type ChatUser interface {
-	UniqueId() string
+	UniqueID() string
 	AvatarURL() string
 }
 
@@ -23,7 +23,7 @@ type chatUser struct {
 	uniqueID string
 }
 
-func (u chatUser) UniqueId() string {
+func (u chatUser) UniqueID() string {
 	return u.uniqueID
 }
 
