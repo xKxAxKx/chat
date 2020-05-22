@@ -15,7 +15,11 @@ import (
 	"github.com/xKxAxKx/chat/trace"
 )
 
-var avatars Avatar = UseFileSystemAvatar
+var avatars Avatar = TryAvatars{
+	UseGravatar,
+	UseFileSystemAvatar,
+	UseAuthAvatar,
+}
 
 // templは1つのテンプレートを表す
 type templateHandler struct {
